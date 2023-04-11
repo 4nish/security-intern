@@ -1,0 +1,30 @@
+1. What does "int argc, char *argv[]" mean in c? Why not only int main().
+Sol. argc is the number of command line arguments given to the program at runtime, and argv is an array of arrays of characters (rather, an array of C-strings) containing these arguments. If you know you're not going to need the command line arguments, you can declare your main at taking a void argument.
+examples - $ cat mysort.c
+#include <stdio.h>
+int main( int argc, char * argv [] ) {
+    printf( "argc = %d\n", argc );
+    for( int i = 0; i < argc; ++i ) {
+        printf( "argv[ %d ] = %s\n", i, argv[ i ] );
+    }
+}
+
+$ gcc mysort.c -o mysort
+
+$ ./mysort 2 8 9 1 4 5
+argc = 7
+argv[ 0 ] = ./mysort
+argv[ 1 ] = 2
+argv[ 2 ] = 8
+argv[ 3 ] = 9
+argv[ 4 ] = 1
+argv[ 5 ] = 4
+argv[ 6 ] = 5
+
+Argument Vector, argv[] = { "mysort", "2", "8", "9", "1", "4", "5" };
+Argument Count, argc = 7 
+
+$ gcc mysort.c -o mysort
+
+$ mysort 2 8 9 1 4 5
+
